@@ -111,4 +111,4 @@ git pull origin main
 
 ## Ownership
 
-Maintained by the Engineering Enablement team. Questions? Reach out in `#help-ee`.
+Maintained by the Engineering Enablement team. Questions? Reach out in [#help-engineering-enablement](https://shippo.slack.com/archives/C0730C6KH7A).
