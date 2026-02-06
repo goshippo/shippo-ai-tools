@@ -47,8 +47,8 @@ ln -s ~/shippo-ai-tools/.claude ~/.claude
 ### Commands
 | Command | Description |
 |---------|-------------|
-| `review-pr` | Thorough PR review focused on best practices |
-| `plan_ticket` | Deep-dive Jira ticket analysis and planning |
+| `review-pr` | Thorough PR review with proactive deeper analysis, validation/observability checks, and existing comment assessment |
+| `plan-ticket` | Deep-dive Jira ticket analysis with delegated sub-agent research, skill discovery, and phased implementation planning |
 | `evaluate-alert` | Evaluate noisy New Relic alerts using decision tree |
 
 ### Skills
