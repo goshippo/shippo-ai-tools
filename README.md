@@ -57,7 +57,7 @@ ln -s ~/shippo-ai-tools/.claude ~/.claude
 ### Skills
 | Skill | Description |
 |-------|-------------|
-| `create-jira-ticket` | Standardized Jira ticket creation with templates |
+| `create-jira-ticket` | Standardized Jira ticket creation with type-specific taxonomy, incident follow-up conventions, and templates |
 | `creating-pull-requests` | PR creation with mandatory ticket references, repo convention discovery via sub-agent, and CI body-parsing safety |
 | `jira-comments` | Succinct, direct Jira comments with draft-first workflow, brevity rules, and anti-pattern guards |
 | `archive-plan-files` | Archive plan directories for closed Jira tickets with mandatory Jira status lookup |
