@@ -68,6 +68,7 @@ ln -s ~/shippo-ai-tools/.claude ~/.claude
 |------|-------------|
 | `communication_style` | Substance over praise, default brevity, no conversation leak in external-facing writing, direct engagement |
 | `writing_standards` | Blacklisted AI-isms with alternatives, filler phrase detection, top offender callouts |
+| `engineering_work_taxonomy` | Dynamic Jira taxonomy discovery via field metadata API, with fallback reference table and selection guide |
 
 ## Contributing
 
