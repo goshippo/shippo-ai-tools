@@ -61,7 +61,7 @@ ln -s ~/shippo-ai-tools/.claude ~/.claude
 | `creating-pull-requests` | PR creation with mandatory ticket references, repo convention discovery via sub-agent, and CI body-parsing safety |
 | `jira-comments` | Succinct, direct Jira comments with draft-first workflow, brevity rules, and anti-pattern guards |
 | `archive-plan-files` | Archive plan directories for closed Jira tickets with mandatory Jira status lookup |
-| `querying-new-relic` | NRQL query best practices and timeout prevention |
+| `querying-new-relic` | NRQL query best practices with timeout/async parameter guidance, day-by-day interval strategy for multi-day analysis, and sub-agent delegation for context protection |
 
 ### Rules
 | Rule | Description |
