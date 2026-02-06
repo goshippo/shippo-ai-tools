@@ -4,38 +4,59 @@ Centralized AI skills, commands, and rules for sharing across engineering teams.
 
 ## Quick Start
 
-### Option 1: Clone alongside your projects
+### Claude Code (Plugin Marketplace)
+
+**Recommended:** Install via Claude Code's plugin marketplace:
 
 ```bash
+# Option 1: Install from local clone
 cd ~/Projects  # or your preferred location
+git clone git@github.com:goshippo/shippo-ai-tools.git
+/plugin marketplace add ./shippo-ai-tools
+/plugin install shippo-skills@shippo-tools
+
+# Option 2: Install directly from GitHub
+/plugin marketplace add goshippo/shippo-ai-tools
+/plugin install shippo-skills@shippo-tools
+```
+
+Then invoke skills by name: `/review-pr`, `/plan-ticket`, etc.
+
+> **Note:** This is a private repo. For auto-updates when installing from GitHub, set `GITHUB_TOKEN` in your environment with repo read access.
+
+### Cursor / Warp
+
+For non-Claude Code tools, clone the repository and reference files directly:
+
+```bash
+cd ~/Projects
 git clone git@github.com:goshippo/shippo-ai-tools.git
 ```
 
-Then reference configs in your AI tool:
-- **Claude Code**: Use `@shippo-ai-tools/.claude/skills/review-pr` in prompts or invoke with `/review-pr`
 - **Cursor**: Copy desired rules to your project's `.cursorrules` or reference via `@`
 - **Warp**: Reference files in your Warp rules configuration
-
-### Option 2: Symlink (optional)
-
-```bash
-git clone git@github.com:goshippo/shippo-ai-tools.git ~/shippo-ai-tools
-ln -s ~/shippo-ai-tools/.claude ~/.claude
-```
-
-> **Note:** This replaces any existing `~/.claude` directory.
 
 ## Directory Structure
 
 ```
-.claude/
-├── skills/         # Skills for specific workflows and domain knowledge
-│   ├── review-pr/
-│   │   └── SKILL.md       # Main instructions
-│   ├── plan-ticket/
-│   │   └── SKILL.md
-│   └── ...
-└── rules/          # Behavioral rules applied across all interactions
+shippo-ai-tools/
+├── .claude-plugin/
+│   └── marketplace.json     # Marketplace metadata
+├── plugins/
+│   └── shippo-skills/
+│       ├── .claude-plugin/
+│       │   └── plugin.json  # Plugin metadata
+│       ├── skills/          # Skills for specific workflows and domain knowledge
+│       │   ├── review-pr/
+│       │   │   └── SKILL.md
+│       │   ├── plan-ticket/
+│       │   │   └── SKILL.md
+│       │   └── ...
+│       └── rules/           # Behavioral rules applied across all interactions
+│           ├── communication_style.md
+│           ├── writing_standards.md
+│           └── engineering_work_taxonomy.md
+└── README.md
 ```
 
 Each skill is a directory with `SKILL.md` as the entrypoint. Optional supporting files include `template.md`, `examples/`, and `scripts/`.
@@ -77,10 +98,10 @@ Each skill is a directory with `SKILL.md` as the entrypoint. Optional supporting
 ### Adding a New Config
 
 1. Create a branch: `git checkout -b add-my-skill`
-2. Add your skill directory to `.claude/skills/`:
+2. Add your skill directory to `plugins/shippo-skills/skills/`:
    ```bash
-   mkdir -p .claude/skills/my-skill
-   touch .claude/skills/my-skill/SKILL.md
+   mkdir -p plugins/shippo-skills/skills/my-skill
+   touch plugins/shippo-skills/skills/my-skill/SKILL.md
    ```
 3. Follow the format of existing skills (YAML frontmatter + markdown content)
 4. Optional: Add supporting files (`template.md`, `examples/`, `scripts/`)
@@ -115,10 +136,12 @@ Step-by-step instructions or behavioral patterns.
 
 ## Updating
 
-Pull latest changes periodically:
+**Claude Code plugin users:** Updates are automatic when installed from GitHub (requires `GITHUB_TOKEN`).
+
+**Manual clone users:** Pull latest changes periodically:
 
 ```bash
-cd ~/shippo-ai-tools  # or wherever you cloned
+cd ~/Projects/shippo-ai-tools  # or wherever you cloned
 git pull origin main
 ```
 
