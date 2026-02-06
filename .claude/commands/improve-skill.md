@@ -1,3 +1,8 @@
+---
+name: improve-skill
+description: Analyze conversation history to find feedback patterns on a skill/command and suggest targeted updates
+---
+
 # Improve Skill from Conversation History
 
 ## Usage
@@ -47,42 +52,17 @@ These memories serve as **anchors** - they focus the history search on what matt
 
 ### Step 4: Search Conversation History
 
-Use Bash to run a Python script that searches conversation history. The script should:
+Write and run a Python script to search `~/.claude/history.jsonl` for sessions that invoked the target command/skill within the time period.
 
-1. **Read `~/.claude/history.jsonl`** to find sessions that invoked the target command/skill
-   - Each line is JSON with: `display` (user prompt), `timestamp` (epoch ms), `sessionId`, `project`
-   - Filter by: command name appearing in `display` field AND timestamp within the time period
-   - Deduplicate by sessionId
+**What to extract:**
 
-2. **For each matching session**, read the full transcript from:
-   `~/.claude/projects/-Users-randallkeur-Projects/{sessionId}.jsonl`
+1. **Find matching sessions** in `history.jsonl` — filter by command name in `display` field and timestamp within period. Deduplicate by `sessionId`.
 
-   Also check other project directories if needed:
-   - `~/.claude/projects/` contains directories named like `-Users-randallkeur-Projects-{repo-name}`
-   - The `project` field in history.jsonl tells you which directory to look in
-   - Convert project path to directory name: replace `/` with `-`, prepend `-`, drop leading `/`
+2. **Read each session transcript** from `~/.claude/projects/{project_dir}/{sessionId}.jsonl`. Derive `project_dir` from the `project` field: replace `/` with `-` and drop the leading `/` (e.g., `/Users/jdoe/Projects` → `-Users-jdoe-Projects`).
 
-   Each transcript line is JSON with:
-   - `type`: `"user"` or `"assistant"`
-   - `message.role`: `"user"` or `"assistant"`
-   - `message.content`: string or array of `{type: "text", text: "..."}` objects
-   - `timestamp`: ISO string
+3. **Extract user feedback** — keep only user messages that represent corrections, follow-ups, or clarifications. Filter out system tags, command invocations, and messages under 20 characters.
 
-3. **Extract user feedback messages** from each session transcript:
-   - Only keep messages where `type == "user"`
-   - Extract text content (handle both string and array formats)
-   - **Filter out noise**: skip messages that are:
-     - Empty or under 20 characters
-     - Start with `<system-reminder>`, `<local-command`, `<command-name>`, `<command-message>`
-     - Contain only the skill/command prompt text (the expanded template)
-     - Are the initial `/command` invocation itself
-   - Strip embedded `<system-reminder>` tags from otherwise useful messages
-   - What remains is **user feedback**: corrections, follow-up questions, additional instructions, and clarifications
-
-4. **Output a structured summary**:
-   - Total sessions found in time period
-   - Sessions with user feedback vs. sessions without
-   - All extracted feedback messages, grouped by session (with date)
+4. **Output** — total sessions, sessions with feedback vs without, all feedback grouped by session with date.
 
 ### Step 5: Analyze Patterns
 

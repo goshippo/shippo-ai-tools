@@ -47,29 +47,29 @@ ln -s ~/shippo-ai-tools/.claude ~/.claude
 ### Commands
 | Command | Description |
 |---------|-------------|
-| `review-pr` | Thorough PR review with proactive deeper analysis, validation/observability checks, and existing comment assessment |
-| `plan-ticket` | Deep-dive Jira ticket analysis with delegated sub-agent research, skill discovery, and phased implementation planning |
-| `implement-plan` | Execute approved technical plans with phased implementation, human-in-the-loop gates, TDD, and draft PR creation |
+| `review-pr` | Thorough PR review focused on software engineering best practices and accurate assessment |
+| `plan-ticket` | Deep-dive Jira ticket analysis and implementation planning |
+| `implement-plan` | Execute approved technical plans with phased implementation and human-in-the-loop gates |
 | `improve-skill` | Analyze conversation history to find feedback patterns on a skill/command and suggest targeted updates |
-| `address-pr-comments` | Analyze and address PR review comments with review-first workflow, sub-agent research, and concise comment drafting |
-| `evaluate-alert` | Evaluate noisy New Relic alerts using decision tree with programmatic incident.io querying, severity-aware stats, auto-resolve detection, and post-analysis artifact generation |
-| `validate-ticket` | Jira ticket validation with evidence collection from PRs, Confluence, New Relic, and codebase, mapped to acceptance criteria |
+| `address-pr-comments` | Analyze and address all review comments on a pull request |
+| `evaluate-alert` | Evaluate noisy New Relic alerts using decision tree from Alert Noise Remediation |
+| `validate-ticket` | Validate Jira ticket completion against acceptance criteria |
 
 ### Skills
 | Skill | Description |
 |-------|-------------|
-| `create-jira-ticket` | Standardized Jira ticket creation with type-specific taxonomy, incident follow-up conventions, and templates |
-| `creating-pull-requests` | PR creation with mandatory ticket references, repo convention discovery via sub-agent, and CI body-parsing safety |
-| `jira-comments` | Succinct, direct Jira comments with draft-first workflow, brevity rules, and anti-pattern guards |
-| `archive-plan-files` | Archive plan directories for closed Jira tickets with mandatory Jira status lookup |
-| `querying-new-relic` | NRQL query best practices with timeout/async parameter guidance, day-by-day interval strategy for multi-day analysis, and sub-agent delegation for context protection |
+| `create-jira-ticket` | Standardized Jira ticket creation with type-specific taxonomy and templates |
+| `creating-pull-requests` | PR creation with repo convention discovery and CI body-parsing safety |
+| `jira-comments` | Succinct, direct Jira comments with draft-first workflow |
+| `archive-plan-files` | Archive plan directories for closed Jira tickets |
+| `querying-new-relic` | NRQL query best practices with timeout and time range guidance |
 
 ### Rules
 | Rule | Description |
 |------|-------------|
-| `communication_style` | Substance over praise, default brevity, no conversation leak in external-facing writing, direct engagement |
-| `writing_standards` | Blacklisted AI-isms with alternatives, filler phrase detection, top offender callouts |
-| `engineering_work_taxonomy` | Dynamic Jira taxonomy discovery via field metadata API, with fallback reference table and selection guide |
+| `communication_style` | Substance over praise, default brevity, direct engagement |
+| `writing_standards` | Blacklisted AI-isms with alternatives |
+| `engineering_work_taxonomy` | Dynamic Jira taxonomy discovery with fallback reference table |
 
 ## Contributing
 

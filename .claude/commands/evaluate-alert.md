@@ -34,7 +34,7 @@ Ask the developer for:
 - Threshold and evaluation window
 - **Is there a Runbook URL attached to the alert condition?** (Yes/No)
 
-Once provided, use `mcp_new_relic_run_nrql_query` to execute the query (adjust time range to recent data) and understand current behavior.
+Once provided, use `mcp__new-relic__run_nrql_query` to execute the query (adjust time range to recent data) and understand current behavior.
 
 ### Step 2: Gather and Validate Incident History
 
@@ -75,7 +75,7 @@ text ~ "key phrase from condition name"
 ```
 
 #### 3c: Rovo Unified Search (fuzzy/semantic)
-Use `mcp_atlassian_search` with natural language query combining:
+Use `mcp__atlassian__search` with natural language query combining:
 - Alert condition name
 - Key terms like "alert", "error rate", endpoint names
 

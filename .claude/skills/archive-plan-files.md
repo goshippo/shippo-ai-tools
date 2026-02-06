@@ -59,6 +59,8 @@ Show a table before taking action:
 | CET-1234 | Fix bug | Done | Archive |
 | CET-5678 | New feature | In Progress | Keep |
 
+**STOP**: Wait for user approval before moving any files.
+
 ### 5. Move Closed Tickets
 
 Create archive directory and move closed ticket directories:

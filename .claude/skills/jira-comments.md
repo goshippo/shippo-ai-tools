@@ -108,50 +108,8 @@ Good:
 
 ---
 
-## Words to Avoid
-
-Per `@.claude/rules/writing_standards.md`:
-
-| Avoid | Use Instead |
-|-------|-------------|
-| delve into | look into, examine |
-| leverage | use, apply |
-| comprehensive | complete, full |
-| robust | solid, reliable |
-| enhance | improve |
-| streamline | simplify |
-| utilize | use |
-| ensure | confirm, make sure |
-| facilitate | enable, help |
-
----
-
-## Tone Guidelines
-
-Per `@.claude/rules/communication_style.md`:
-
-- **No praise patterns** - Skip "great work", "thanks for the update"
-- **No hedging** - Avoid "perhaps", "maybe consider", "I think"
-- **No enthusiasm** - Skip "!" and exclamation-heavy language
-- **State facts** - Present information neutrally
-- **Be direct** - If something is wrong or unclear, say so
-
----
-
-## Anti-Patterns
-
-Avoid these comment styles:
-
-- **The preamble**: "Just wanted to drop a quick note..."
-- **The praise sandwich**: "Great progress! But we need X. Keep it up!"
-- **The hedge**: "I might be wrong, but perhaps we should consider..."
-- **The filler**: "It's worth noting that..." / "Additionally..."
-- **The enthusiasm**: "Excited to share!!!"
-- **The conversation leak**: Referencing private conversation context in the comment (see `@.claude/rules/communication_style.md` Anti-Patterns)
-
----
-
 ## References
 
-- `@.claude/rules/writing_standards.md` - Word choice guidelines
-- `@.claude/rules/communication_style.md` - Tone and directness standards
+All Jira comments must also follow:
+- `@.claude/rules/writing_standards.md` — word choice (no blacklisted AI-isms)
+- `@.claude/rules/communication_style.md` — tone, directness, no conversation leak

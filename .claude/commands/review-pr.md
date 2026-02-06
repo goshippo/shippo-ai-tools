@@ -68,45 +68,9 @@ Before reviewing: Navigate to repo, run `git fetch origin --prune && git checkou
 
 ## Existing PR Comments Assessment
 
-**Important**: Assess existing review comments to determine their current status.
+If the PR has existing review comments, classify each thread's status (resolved, outdated, addressed via discussion, pending code change, needs clarification) and provide a summary table.
 
-**1. Fetch All Comments**
-- Get all review comments including thread context and replies
-- Get all reviews (approved, changes requested, commented)
-
-**2. Classify Each Comment Thread**
-
-For each comment thread, determine its status:
-
-| Status | Criteria | Action |
-|--------|----------|--------|
-| ✅ **Resolved** | Explicitly marked resolved in GitHub | Skip - no action needed |
-| 🔄 **Outdated** | Code at that line has changed since comment was made (check `original_commit_id` vs current `commit_id`) | Note as outdated, verify if underlying concern still applies |
-| 💬 **Addressed via Discussion** | Author replied with explanation, no code change needed | Summarize resolution |
-| ⚠️ **Pending Code Change** | Valid feedback, no follow-up commit addresses it | Flag as requiring action |
-| ❓ **Needs Clarification** | Ambiguous or requires more context | Note what clarification is needed |
-
-**3. Check for Follow-up Commits**
-- Compare `original_commit_id` (when comment was made) to current HEAD
-- If commits exist after the comment, check if they address the feedback
-- Don't assume addressed just because new commits exist - verify the actual changes
-
-**4. Comment Assessment Summary**
-
-Provide a summary table:
-
-```markdown
-### PR Comment Status
-
-| Comment | Author | Status | Notes |
-|---------|--------|--------|-------|
-| "Add default value" | @reviewer1 | 💬 Addressed via discussion | Author explained backward compatibility concern |
-| "Missing null check" | @reviewer2 | ✅ Resolved | Fixed in commit abc123 |
-| "Consider caching" | @reviewer3 | 🔄 Outdated | Code refactored, no longer applicable |
-| "Add tests" | @reviewer4 | ⚠️ Pending | No test coverage added yet |
-
-**Summary**: X comments total, Y resolved, Z pending action
-```
+For detailed comment analysis and remediation workflow, use `/address-pr-comments`.
 
 ## Review Output Format
 

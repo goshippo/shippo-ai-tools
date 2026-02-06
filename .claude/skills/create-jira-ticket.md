@@ -195,7 +195,7 @@ When a Task clearly fits a non-default category, use the appropriate taxonomy:
 | Context | Taxonomy | Label(s) |
 |---------|----------|----------|
 | Post-incident work | Incident Follow-up | `incident-follow-up` |
-| Active incident response | Incident | `incident-follow-up` |
+| Active incident response | Incident | `incident` |
 | On-call requests / help channel | Inquiry - #help- channel | — |
 | Alert triage from NR/Databricks | Telemetry Investigation | — |
 | Manual ops (scaling, config) | Toil | — |

@@ -33,7 +33,7 @@ For every comment retrieved, perform the following analysis:
 - **Assess validity**: Evaluate whether the comment makes sense given the code context
 
 ### 2.2 Determine if Change is Required
-- **Is it actionable?** (vs. just informational or a question)
+- **Does it require a code change?** (vs. just informational or a question)
 - **Is it valid?** (vs. based on misunderstanding)
 - **Is it in scope?** (vs. out of scope for this PR)
 - **What's the priority?** (critical, important, nice-to-have)

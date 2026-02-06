@@ -1,10 +1,15 @@
+---
+name: implement-plan
+description: Execute approved technical plans with phased implementation and human-in-the-loop gates
+---
+
 # Implement Plan Command
 
 ## Purpose
-Execute an approved technical plan from a `CET-{id}-plan.md` file with structured, incremental progress.
+Execute an approved technical plan with structured, incremental progress.
 
 ## Usage
-Provide the plan file path (e.g., `CET-1643-plan.md`)
+Provide the plan file path (e.g., `.claude/plans/CET-1643/CET-1643-plan.md`)
 
 ## Process
 
@@ -21,43 +26,28 @@ Provide the plan file path (e.g., `CET-1643-plan.md`)
 
 **STOP**: Confirm branch name and starting point with user
 
-### 3. Create Todo List
+### 3. Create Todo List and Clarify Ambiguities
 Break down the plan into small, achievable tasks:
 - Each task should be completable in one focused effort
 - Group tasks into phases matching the plan's structure
-- Include verification steps
-- Note dependencies between tasks
-- Flag any ambiguities or unclear requirements
+- Include verification steps and note dependencies
+- Flag ambiguities, unclear requirements, or scope questions
 
-**STOP**: Present the todo list and ask for approval before proceeding
+**STOP**: Present the todo list and any questions. Wait for approval and clarifications before proceeding.
 
-### 4. Clarify Ambiguities
-Before implementation, raise questions about:
-- Unclear requirements or acceptance criteria
-- Missing technical details
-- Potential conflicts with existing code
-- Scope boundaries
-
-**STOP**: Wait for clarification responses
-
-### 5. Execute Phases
+### 4. Execute Phases
 For each phase in the plan:
 - Implement the changes
-- Run relevant tests/checks
+- Run `make check test` or project-equivalent
+- Confirm success criteria met
 - Update the plan file: mark completed items `- [x]`, note deviations
 - Provide brief phase summary (under 200 words)
 
 **STOP**: Present phase results and get approval before proceeding to next phase
 
-### 6. Verification
-After each phase:
-- Run `make check test` or project-equivalent
-- Confirm success criteria met
-- Document any deviations from plan
-- Update the plan file with current status so context can be resumed if needed
-
-### 7. Draft PR
+### 5. Draft PR
 After all phases are complete and tests pass:
+- Follow the `creating-pull-requests` skill for PR conventions and template discovery
 - Create a draft pull request against the default branch
 - PR description should summarize the changes and reference the Jira ticket
 

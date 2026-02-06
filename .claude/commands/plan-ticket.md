@@ -9,8 +9,8 @@ description: Deep-dive Jira ticket analysis and implementation planning
 When user provides a Jira ticket ID or URL, analyze it deeply and create an implementation plan.
 
 ## Steps
-1. **Fetch ticket details** using `mcp_atlassian_getJiraIssue` with the ticket ID/key
-2. **Get comments** using `mcp_atlassian_searchJiraIssuesUsingJql` to find related discussions
+1. **Fetch ticket details** using `mcp__atlassian__getJiraIssue` with the ticket ID/key
+2. **Get comments** using `mcp__atlassian__searchJiraIssuesUsingJql` to find related discussions
 3. **Delegated research phase** — spawn sub-agents (in parallel where possible) to protect the main context window:
    - **codebase-locator** (if available): Find relevant files, modules, entry points
    - **codebase-analyzer** (if available): Understand how code works with file:line references
@@ -30,18 +30,17 @@ When user provides a Jira ticket ID or URL, analyze it deeply and create an impl
    - Scope boundaries
    - Technical constraints
    - Acceptance criteria gaps
-7. **Wait for developer agreement** on the plan
-8. **Discover available skills and plugins** — before writing the plan, scan for installed skills, commands, and plugins that could assist with implementation:
+7. **Discover available skills and plugins** — scan for installed skills, commands, and plugins that could assist with implementation:
    - Check `.claude/commands/`, `.claude/skills/`, and any loaded plugin skills
    - Identify relevant ones (e.g., TDD, code review, debugging, execution workflows)
-   - Include discovered skills/plugins as recommendations in the plan
-9. **Generate implementation plan** saved to `.claude/plans/<ticket-id>/<ticket-id>-plan.md`:
+8. **Generate implementation plan** saved to `.claude/plans/<ticket-id>/<ticket-id>-plan.md`:
    - **Header**: Goal, architecture approach, tech stack
    - **Phases** with human-in-the-loop checkpoints between major phases
    - **Tasks**: Bite-sized steps with exact file paths and test commands
    - **Acceptance criteria checklist** from the ticket
    - **Recommended skills/plugins**: List discovered skills and plugins relevant to execution
    - **Execution handoff**: Present available execution-related commands and skills the user has installed
+9. **Wait for developer agreement** on the plan
 
 ## Anti-Patterns
 - Do NOT read large source files inline — delegate to a codebase-analyzer sub-agent (if available)

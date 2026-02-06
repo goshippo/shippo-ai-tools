@@ -7,7 +7,7 @@
 1. **Jira field metadata** (primary): Query `customfield_11173` allowed values via:
    ```
    mcp__atlassian__getJiraIssueTypeMetaWithFields
-     cloudId: "https://shippo.atlassian.net"
+     cloudId: bcd1ff35-af4b-43de-88a4-a2bc11d9f807
      projectIdOrKey: <project key, e.g. "CET">
      issueTypeId: <issue type ID>
    ```

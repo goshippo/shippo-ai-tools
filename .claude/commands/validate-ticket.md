@@ -10,7 +10,7 @@ When user provides a Jira ticket ID or URL, perform validation assessment to det
 
 ### Step 1: Gather Ticket Information
 
-1. **Fetch ticket details** using `mcp_atlassian_getJiraIssue` with expand=comments,changelog
+1. **Fetch ticket details** using `mcp__atlassian__getJiraIssue` with expand=comments,changelog
    - Extract: summary, description, acceptance criteria, status, assignee, reporter
    - Note the issue type (Story, Task, Bug, etc.)
    - Verify Engineering Work Taxonomy is set per @.claude/rules/engineering_work_taxonomy.md
@@ -34,7 +34,7 @@ When user provides a Jira ticket ID or URL, perform validation assessment to det
 - Note any blockers, constraints, or follow-up items mentioned
 
 #### From Linked Confluence Pages
-- Fetch using `mcp_atlassian_getConfluencePage` if documentation was a deliverable
+- Fetch using `mcp__atlassian__getConfluencePage` if documentation was a deliverable
 - Verify the content exists and matches expected deliverables
 
 #### From Linked PRs (if applicable)
