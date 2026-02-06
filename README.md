@@ -52,7 +52,7 @@ ln -s ~/shippo-ai-tools/.claude ~/.claude
 | `implement-plan` | Execute approved technical plans with phased implementation, human-in-the-loop gates, TDD, and draft PR creation |
 | `improve-skill` | Analyze conversation history to find feedback patterns on a skill/command and suggest targeted updates |
 | `address-pr-comments` | Analyze and address PR review comments with review-first workflow, sub-agent research, and concise comment drafting |
-| `evaluate-alert` | Evaluate noisy New Relic alerts using decision tree |
+| `evaluate-alert` | Evaluate noisy New Relic alerts using decision tree with programmatic incident.io querying, severity-aware stats, auto-resolve detection, and post-analysis artifact generation |
 | `validate-ticket` | Jira ticket validation with evidence collection from PRs, Confluence, New Relic, and codebase, mapped to acceptance criteria |
 
 ### Skills
