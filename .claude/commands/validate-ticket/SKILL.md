@@ -1,3 +1,9 @@
+---
+name: validate-ticket
+description: Validate Jira ticket completion against acceptance criteria
+allowed-tools: ToolSearch(mcp__atlassian__*, mcp__github-prs__*, mcp__new-relic__*), Read, Bash(jq), Grep, Glob, Task
+---
+
 # Validate Ticket Command
 
 ## Usage

@@ -1,6 +1,7 @@
 ---
 name: implement-plan
 description: Execute approved technical plans with phased implementation and human-in-the-loop gates
+allowed-tools: Read, Bash(git *, make *), Write, ToolSearch
 ---
 
 # Implement Plan Command

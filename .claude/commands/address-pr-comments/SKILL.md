@@ -1,3 +1,9 @@
+---
+name: address-pr-comments
+description: Analyze and address all review comments on a pull request
+allowed-tools: Bash(gh *, git *), Read, Grep, Task
+---
+
 # Analyze and Address PR Comments
 
 You are tasked with analyzing and addressing all review comments on a pull request.

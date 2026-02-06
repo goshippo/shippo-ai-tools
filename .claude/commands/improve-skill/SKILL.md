@@ -1,6 +1,7 @@
 ---
 name: improve-skill
 description: Analyze conversation history to find feedback patterns on a skill/command and suggest targeted updates
+allowed-tools: Read, Bash(python3), Write
 ---
 
 # Improve Skill from Conversation History

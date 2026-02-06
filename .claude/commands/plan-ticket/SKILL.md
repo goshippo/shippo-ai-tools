@@ -1,6 +1,7 @@
 ---
 name: plan-ticket
 description: Deep-dive Jira ticket analysis and implementation planning
+allowed-tools: ToolSearch(mcp__atlassian__*), Task, Read, Write, Grep, Glob
 ---
 
 # Ticket Researcher Command
