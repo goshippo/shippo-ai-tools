@@ -58,6 +58,7 @@ ln -s ~/shippo-ai-tools/.claude ~/.claude
 | Skill | Description |
 |-------|-------------|
 | `create-jira-ticket` | Standardized Jira ticket creation with templates |
+| `jira-comments` | Succinct, direct Jira comments with draft-first workflow, brevity rules, and anti-pattern guards |
 | `querying-new-relic` | NRQL query best practices and timeout prevention |
 
 ## Contributing
