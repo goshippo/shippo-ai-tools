@@ -1,7 +1,7 @@
 ---
 name: evaluate-alert
 description: Evaluate noisy New Relic alerts using decision tree from Alert Noise Remediation
-allowed-tools: ToolSearch(mcp__new-relic__*, mcp__atlassian__*), Read, Grep, Bash(jq)
+allowed-tools: ToolSearch(mcp__new-relic__*, mcp__atlassian__*), Read, Grep, Bash(jq), Bash(grep *)
 ---
 
 # Alert Evaluation Command

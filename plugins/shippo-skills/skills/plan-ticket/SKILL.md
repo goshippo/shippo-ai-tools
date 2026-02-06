@@ -31,8 +31,8 @@ When user provides a Jira ticket ID or URL, analyze it deeply and create an impl
    - Scope boundaries
    - Technical constraints
    - Acceptance criteria gaps
-7. **Discover available skills and plugins** — scan for installed skills, commands, and plugins that could assist with implementation:
-   - Check `.claude/commands/`, `.claude/skills/`, and any loaded plugin skills
+7. **Discover available skills and plugins** — scan for installed skills and plugins that could assist with implementation:
+   - Check `plugins/shippo-skills/skills/` and any loaded plugin skills
    - Identify relevant ones (e.g., TDD, code review, debugging, execution workflows)
 8. **Generate implementation plan** saved to `.claude/plans/<ticket-id>/<ticket-id>-plan.md`:
    - **Header**: Goal, architecture approach, tech stack
