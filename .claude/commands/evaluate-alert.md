@@ -15,14 +15,14 @@ Pair with a developer to evaluate a New Relic alert and determine remediation st
 - **Alert condition name** (required)
 - **NRQL query** (required)
 - **Threshold and evaluation window** (required)
-- **incident.io data** (required) - CSV export or alert history
+- **incident.io data** (required) - Use `ee-scripts/` helpers or incident.io API with user's env var token; fall back to CSV export
 
 If the user only provides a New Relic link, ask them to open it and provide:
 1. The alert condition name
 2. The NRQL query from the condition
 3. The threshold (e.g., "> 1.0 for 2 minutes")
 4. Is there a Runbook URL attached to the condition?
-5. Do you have alert data from incident.io
+5. Do you have alert data from incident.io, or should we query it programmatically?
 
 ## Workflow
 
@@ -34,17 +34,21 @@ Ask the developer for:
 - Threshold and evaluation window
 - **Is there a Runbook URL attached to the alert condition?** (Yes/No)
 
-Once provided, use `mcp_new_relic_run_nrql_query` to execute the query (adjust time range to recent data) and understand current behavior.
+Once provided, use `mcp__new-relic__run_nrql_query` to execute the query (adjust time range to recent data) and understand current behavior.
 
 ### Step 2: Gather and Validate Incident History
 
-Ask the developer to provide incident history from incident.io.
+**Preferred:** Use scripts in `ee-scripts/` to query incident.io programmatically (the user's `INCIDENT_IO_API_KEY` env var provides authentication). If scripts don't cover the need, use the incident.io REST API directly.
+
+**Fallback:** Ask the developer to provide incident history from incident.io as CSV export.
 
 **Important:** Before analyzing, check the date range of the data:
 - Look at earliest and latest "Last occurrence" dates
 - Note the actual timespan covered (e.g., "28 days" vs "12 months")
 - This affects how we answer Step 0c
 - **If data covers less than 12 months, ask the user to provide additional historical data or confirm they don't have more**
+
+**Important:** Separate alerts by severity/condition before computing stats. If multiple conditions exist for the same service (e.g., Warning vs Critical, or duplicate conditions in different policies), analyze each independently. Conflating them produces misleading decline rates.
 
 Key data needed:
 - How many times has this alert fired?
@@ -71,7 +75,7 @@ text ~ "key phrase from condition name"
 ```
 
 #### 3c: Rovo Unified Search (fuzzy/semantic)
-Use `mcp_atlassian_search` with natural language query combining:
+Use `mcp__atlassian__search` with natural language query combining:
 - Alert condition name
 - Key terms like "alert", "error rate", endpoint names
 
@@ -122,6 +126,11 @@ text ~ "Alert Condition Name" OR text ~ "key endpoint"
 #### Q3: Does it fire during NORMAL OPERATIONS?
 - **Yes (fires during normal ops)** → Continue to Q4
 - **No (only fires during real issues)** → Skip to Q5
+
+**Q3b: Are alerts auto-resolving before human review?**
+- Check resolution times — consistent short durations (e.g., all ~5 min) suggest auto-resolution via NR condition clearing
+- If yes, note this: auto-resolved alerts may mask whether the alert is actually actionable (nobody gets a chance to act)
+- This is evidence toward **🟡 TUNE** (extend evaluation window) or **🔴 REMOVE** (convert to dashboard metric)
 
 #### Q4: Does it CORRELATE with actual incidents when it fires?
 - **Rarely/Never correlates** → **🔴 REMOVE:** Invalid metric or incorrect threshold
@@ -176,6 +185,13 @@ Based on classification, discuss specific remediation options:
 **✅ KEEP:**
 - Document current state
 - Continue monitoring decline rate
+
+## Output Artifacts
+
+After the decision tree evaluation and remediation discussion, offer to create:
+1. **Jira comment** — Succinct summary of findings and recommendation for the alert's ticket (use jira-comments skill)
+2. **Slack post** — Team outreach message for the alert's owning channel, formatted as initial post + thread with stats
+3. **Tuning ticket** — If classification is TUNE or IMPROVE, offer to create a follow-up Jira ticket
 
 ## Output Format
 

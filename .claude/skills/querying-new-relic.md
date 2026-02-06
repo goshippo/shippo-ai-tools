@@ -33,9 +33,22 @@ WHERE cluster_name = 'prod-ixion'
 | `SINCE 1 hour ago` | Default for exploratory queries |
 | `SINCE 4 hours ago` | If 1 hour shows nothing |
 | `SINCE 1 day ago` | Only after confirming data exists |
-| `SINCE 7 days ago` | Trend analysis only, with aggregation |
 
-**If user says "last week":** Start with their range but add tight filters. If timeout, narrow the range and retry.
+**Never query more than 1 day at once.** For multi-day analysis, run separate 1-day queries:
+
+```nrql
+-- Day 1
+SELECT count(*) FROM Log WHERE ... SINCE 1 day ago UNTIL 0 days ago
+-- Day 2
+SELECT count(*) FROM Log WHERE ... SINCE 2 days ago UNTIL 1 day ago
+-- Day 3
+SELECT count(*) FROM Log WHERE ... SINCE 3 days ago UNTIL 2 days ago
+-- ... up to 7 days
+```
+
+This avoids timeouts and produces more reliable data than a single 7-day query.
+
+**If user says "last week":** Run 7 individual 1-day queries. Do not attempt a single 7-day query.
 
 ## Query Workflow
 
@@ -45,6 +58,44 @@ WHERE cluster_name = 'prod-ixion'
 3. If data exists → Expand time range or remove LIMIT
 4. If empty → Check filters, try discover_event_types
 ```
+
+## Timeout and Async Parameters
+
+The MCP tool `run_nrql_query` accepts `timeout_seconds` and `use_async` parameters. Use them correctly:
+
+**Default behavior (no overrides):**
+- Connection timeout: 10s
+- Read timeout: 120s (this is usually sufficient)
+- Async auto-selects for: TIMESERIES, FACET, day/week ranges, queries >100 chars
+
+**DO NOT set `timeout_seconds` to increase timeout.** Setting `timeout_seconds=30` replaces ALL timeouts (connect, read, write, pool) with 30s — this REDUCES the read timeout from the default 120s. Only set this if you need a value HIGHER than 120s.
+
+**`use_async` has a 1-attempt polling limit.** If a query doesn't complete after the initial request + 1 poll, it fails. Async is not a fix for heavy queries — narrowing the query is.
+
+| Situation | What to do |
+|-----------|------------|
+| Query times out | Narrow filters or time range. Do NOT add `timeout_seconds`. |
+| Still timing out | Split into multiple smaller queries (see Time Range Rules). |
+| Need >120s read timeout | Set `timeout_seconds` to desired value (e.g., 180). |
+
+## Context Protection
+
+**Always delegate NR queries to sub-agents when possible.** NR responses are large and exhaust the main context window.
+
+**When to use sub-agents:**
+- Any investigative query series (more than 1-2 queries)
+- Multi-day trend analysis (each day = separate query in sub-agent)
+- Exploratory queries where you don't know what you'll find
+- When the user asks for NR data as part of a larger task (ticket review, RCA, etc.)
+
+**Sub-agent setup:**
+- Pass this skill's content to the sub-agent prompt
+- Include the specific question to answer (not just "run queries")
+- Have the sub-agent return a summary of findings, not raw query results
+
+**When direct queries are fine:**
+- Single, targeted query with known small result set
+- User provides an exact query to run and wants the raw result
 
 ## Preventing Timeouts
 
@@ -191,6 +242,11 @@ Without progressive validation, you might conclude "no errors exist" when actual
 ## Debugging
 
 1. **Timeout?** → Reduce time range, add filters, add LIMIT
+
+   **DO NOT retry the same query with `timeout_seconds` or `use_async` overrides.**
+   These are not fixes for heavy queries. Narrow the query instead.
+   If a query times out, it means too much data — not too little time.
+
 2. **Syntax error?** → Check function/clause is in valid list above
 3. **Empty results?** → **Do not assume no data exists.** Verify query is correct first.
 4. **Too much data?** → Add `cluster_name`, `environment`, reduce time range

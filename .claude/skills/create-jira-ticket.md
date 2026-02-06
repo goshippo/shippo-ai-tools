@@ -1,6 +1,6 @@
 ---
 name: create-jira-ticket
-description: Use when creating Jira tickets (Initiatives, Epics, Tasks, Stories). Applies standardized templates with succinct, direct content. Includes duplication checks via Atlassian MCP tools.
+description: Use when creating Jira tickets (Initiatives, Epics, Tasks, Stories, Sub-tasks). Applies standardized templates with type-specific taxonomy and label guidance. Includes duplication checks via Atlassian MCP tools.
 ---
 
 # Creating Jira Tickets
@@ -8,6 +8,8 @@ description: Use when creating Jira tickets (Initiatives, Epics, Tasks, Stories)
 ## Core Principle
 
 **Template adherence is mandatory.** Every ticket follows the exact structure from jira_templates.md. No exceptions.
+
+> **Future**: This skill is a candidate for splitting into type-specific and/or team-specific templates (e.g., `templates/incident-follow-up.md`, `templates/cet-task.md`). For now, all conventions live here. When the skill exceeds ~300 lines or team-specific patterns diverge, extract into a template directory.
 
 ## Before Creating Any Ticket
 
@@ -37,10 +39,13 @@ If duplicates exist: reference them, don't create new tickets.
 | Epic | Key Result under Initiative | Initiative |
 | Story | User-facing value, feature delivery | Epic |
 | Task | Internal/technical/operational work | Epic (optional) |
+| Sub-task | Breakdown of parent Task/Story | Task or Story |
 
 **Story vs Task Decision:**
 - Story: "As a [user], I want [feature] so that [value]" - has user-facing outcome
 - Task: Backend ops, infrastructure, refactors, setup - no user-facing value
+
+**Sub-task Rule:** Sub-tasks inherit taxonomy and labels from their parent issue. Do not override unless explicitly instructed.
 
 ## Title Format (Strict)
 
@@ -166,11 +171,68 @@ If duplicates exist: reference them, don't create new tickets.
 
 | Field | Value |
 |-------|-------|
-| Issue Type | Initiative / Epic / Task / Story |
-| Parent | Link to parent Epic/Initiative |
-| Engineering Work Taxonomy | Technical Investment (Tech Inv) |
-| Labels | `ready-for-grooming` |
-| customfield_11173 | For Tasks: Technical Investment (Tech Inv) |
+| Issue Type | Initiative / Epic / Task / Story / Sub-task |
+| Parent | Link to parent Epic/Initiative (Sub-tasks link to Task/Story) |
+| Engineering Work Taxonomy | See type-specific guidance below |
+| Labels | See type-specific guidance below |
+| customfield_11173 | Taxonomy value from guidance below |
+
+## Engineering Work Taxonomy by Issue Type
+
+| Issue Type | Default Taxonomy | Notes |
+|------------|-----------------|-------|
+| Initiative | Feature - Product Enhancement | Strategic objectives are usually product features |
+| Epic | Inherits from Initiative context | Match the parent Initiative's intent |
+| Story | Feature - Product Enhancement | User-facing work is almost always a feature |
+| Task | Technical Investment (Tech Inv) | Most internal/technical tasks. Override when context is clear (see below) |
+| Sub-task | Inherit from parent | Match the parent Task/Story taxonomy |
+| Bug | System Patch | One-off fix for system health |
+
+### Task Taxonomy Overrides
+
+When a Task clearly fits a non-default category, use the appropriate taxonomy:
+
+| Context | Taxonomy | Label(s) |
+|---------|----------|----------|
+| Post-incident work | Incident Follow-up | `incident-follow-up` |
+| Active incident response | Incident | `incident` |
+| On-call requests / help channel | Inquiry - #help- channel | — |
+| Alert triage from NR/Databricks | Telemetry Investigation | — |
+| Manual ops (scaling, config) | Toil | — |
+| Carrier-mandated changes | Carrier Compliance (Cc) | — |
+| Partner-specific request | Partner Commitment (Pc) | — |
+| Security fix | Security Patch | — |
+| Scoping/estimation | Level of Effort (LoE) | — |
+
+### Default Labels
+
+| Context | Labels |
+|---------|--------|
+| Standard ticket | `ready-for-grooming` |
+| Incident follow-up | `incident-follow-up` |
+| Both apply | Include both labels |
+
+## Incident Follow-up Tickets
+
+When creating tickets from incident investigations:
+
+1. **Taxonomy**: Set to "Incident Follow-up"
+2. **Label**: Add `incident-follow-up`
+3. **Reference incidents**: Include INC-xxxx IDs in description
+4. **Link to parent**: If the follow-up belongs under an existing story/epic, link it
+5. **Description pattern**:
+
+```markdown
+**Description:**
+Follow-up from [INC-xxxx](link). [Brief description of the fix needed].
+
+**Context:**
+* Root cause: [1 sentence]
+* Impact: [1 sentence]
+
+**AC:**
+* [Fix or mitigation deliverable]
+```
 
 ## Writing Standards
 
@@ -201,8 +263,8 @@ Before creating any ticket:
 - [ ] Description is 2-3 sentences max
 - [ ] AC is 1-3 measurable criteria max
 - [ ] Parent epic/initiative linked (if applicable)
-- [ ] Labels include `ready-for-grooming`
-- [ ] Engineering Work Taxonomy set
+- [ ] Labels set per context (default: `ready-for-grooming`, incidents: `incident-follow-up`)
+- [ ] Engineering Work Taxonomy set per issue type guidance above
 - [ ] No blacklisted words in content
 - [ ] No verbose explanations
 

@@ -47,15 +47,29 @@ ln -s ~/shippo-ai-tools/.claude ~/.claude
 ### Commands
 | Command | Description |
 |---------|-------------|
-| `review-pr` | Thorough PR review focused on best practices |
-| `plan_ticket` | Deep-dive Jira ticket analysis and planning |
-| `evaluate-alert` | Evaluate noisy New Relic alerts using decision tree |
+| `review-pr` | Thorough PR review focused on software engineering best practices and accurate assessment |
+| `plan-ticket` | Deep-dive Jira ticket analysis and implementation planning |
+| `implement-plan` | Execute approved technical plans with phased implementation and human-in-the-loop gates |
+| `improve-skill` | Analyze conversation history to find feedback patterns on a skill/command and suggest targeted updates |
+| `address-pr-comments` | Analyze and address all review comments on a pull request |
+| `evaluate-alert` | Evaluate noisy New Relic alerts using decision tree from Alert Noise Remediation |
+| `validate-ticket` | Validate Jira ticket completion against acceptance criteria |
 
 ### Skills
 | Skill | Description |
 |-------|-------------|
-| `create-jira-ticket` | Standardized Jira ticket creation with templates |
-| `querying-new-relic` | NRQL query best practices and timeout prevention |
+| `create-jira-ticket` | Standardized Jira ticket creation with type-specific taxonomy and templates |
+| `creating-pull-requests` | PR creation with repo convention discovery and CI body-parsing safety |
+| `jira-comments` | Succinct, direct Jira comments with draft-first workflow |
+| `archive-plan-files` | Archive plan directories for closed Jira tickets |
+| `querying-new-relic` | NRQL query best practices with timeout and time range guidance |
+
+### Rules
+| Rule | Description |
+|------|-------------|
+| `communication_style` | Substance over praise, default brevity, direct engagement |
+| `writing_standards` | Blacklisted AI-isms with alternatives |
+| `engineering_work_taxonomy` | Dynamic Jira taxonomy discovery with fallback reference table |
 
 ## Contributing
 
