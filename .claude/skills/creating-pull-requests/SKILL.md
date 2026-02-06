@@ -1,6 +1,15 @@
 ---
 name: creating-pull-requests
 description: Use when asked to create a PR, create a draft PR, or create a pull request in any repository. Discovers repo-specific PR templates, contributing guides, and CI constraints before writing the description.
+allowed-tools:
+  - Glob
+  - Grep
+  - Read
+  - Bash(gh pr *)
+  - Bash(git *)
+  - Bash(echo)
+  - Task
+  - mcp__github-prs__create_pull_request
 ---
 
 # Creating Pull Requests

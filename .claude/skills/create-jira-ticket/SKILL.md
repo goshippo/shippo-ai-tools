@@ -1,6 +1,16 @@
 ---
 name: create-jira-ticket
 description: Use when creating Jira tickets (Initiatives, Epics, Tasks, Stories, Sub-tasks). Applies standardized templates with type-specific taxonomy and label guidance. Includes duplication checks via Atlassian MCP tools.
+allowed-tools:
+  - mcp__atlassian__searchJiraIssuesUsingJql
+  - mcp__atlassian__getJiraIssue
+  - mcp__atlassian__createJiraIssue
+  - mcp__atlassian__getVisibleJiraProjects
+  - mcp__atlassian__getJiraProjectIssueTypesMetadata
+  - mcp__atlassian__getJiraIssueTypeMetaWithFields
+  - mcp__atlassian__lookupJiraAccountId
+  - Grep
+  - Read
 ---
 
 # Creating Jira Tickets

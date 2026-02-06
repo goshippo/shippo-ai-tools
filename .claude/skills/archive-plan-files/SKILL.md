@@ -1,6 +1,14 @@
 ---
 name: archive-plan-files
 description: Archive plan directories for closed Jira tickets
+allowed-tools:
+  - Bash(ls)
+  - Bash(grep)
+  - Bash(mkdir)
+  - Bash(mv)
+  - Bash(echo)
+  - Bash(curl)
+  - mcp__atlassian__getJiraIssue
 ---
 
 # Archive Plan Files

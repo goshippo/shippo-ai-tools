@@ -1,3 +1,11 @@
+---
+name: jira-comments
+description: Write succinct, direct Jira ticket comments aligned with ticket context.
+allowed-tools:
+  - mcp__atlassian__addCommentToJiraIssue
+  - Read
+---
+
 # Jira Comments Skill
 
 ## Name
