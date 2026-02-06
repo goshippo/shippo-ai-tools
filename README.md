@@ -12,7 +12,7 @@ git clone git@github.com:goshippo/shippo-ai-tools.git
 ```
 
 Then reference configs in your AI tool:
-- **Claude Code**: Use `@shippo-ai-tools/.claude/commands/review-pr.md` in prompts
+- **Claude Code**: Use `@shippo-ai-tools/.claude/commands/review-pr` in prompts
 - **Cursor**: Copy desired rules to your project's `.cursorrules` or reference via `@`
 - **Warp**: Reference files in your Warp rules configuration
 
