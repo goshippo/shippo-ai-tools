@@ -65,7 +65,7 @@ Each skill is a directory with `SKILL.md` as the entrypoint. Optional supporting
 
 | Type | Trigger | Purpose | Example |
 |------|---------|---------|---------|
-| **Skill** | User invokes (`/skill-name`) or AI detects relevant context | Specific workflows and domain knowledge | `/review-pr`, `create-jira-ticket` |
+| **Skill** | User invokes (`/skill-name`) or AI detects relevant context | Specific workflows and domain knowledge | `/review-pr`, `jira` |
 | **Rule** | Always active | Behavioral constraints | `communication_style`, `writing_standards` |
 
 ## Available Configs
@@ -79,10 +79,8 @@ Each skill is a directory with `SKILL.md` as the entrypoint. Optional supporting
 | `improve-skill` | Analyze conversation history to find feedback patterns on a skill/command and suggest targeted updates | `/improve-skill` |
 | `address-pr-comments` | Analyze and address all review comments on a pull request | `/address-pr-comments` |
 | `evaluate-alert` | Evaluate noisy New Relic alerts using decision tree from Alert Noise Remediation | `/evaluate-alert` |
-| `validate-ticket` | Validate Jira ticket completion against acceptance criteria | `/validate-ticket` |
-| `create-jira-ticket` | Standardized Jira ticket creation with type-specific taxonomy and templates | Auto-invoked when creating tickets |
+| `jira` | Jira ticket operations: create tickets, write comments, validate completion. Consolidated skill with templates and taxonomy reference. | Auto-invoked for Jira work |
 | `creating-pull-requests` | PR creation with repo convention discovery and CI body-parsing safety | Auto-invoked when creating PRs |
-| `jira-comments` | Succinct, direct Jira comments with draft-first workflow | Auto-invoked for Jira comments |
 | `archive-plan-files` | Archive plan directories for closed Jira tickets | `/archive-plan-files` |
 | `querying-new-relic` | NRQL query best practices with timeout and time range guidance | Auto-invoked for New Relic queries |
 
