@@ -61,6 +61,12 @@ ln -s ~/shippo-ai-tools/.claude ~/.claude
 | `jira-comments` | Succinct, direct Jira comments with draft-first workflow, brevity rules, and anti-pattern guards |
 | `querying-new-relic` | NRQL query best practices and timeout prevention |
 
+### Rules
+| Rule | Description |
+|------|-------------|
+| `communication_style` | Substance over praise, default brevity, no conversation leak in external-facing writing, direct engagement |
+| `writing_standards` | Blacklisted AI-isms with alternatives, filler phrase detection, top offender callouts |
+
 ## Contributing
 
 ### Adding a New Config
