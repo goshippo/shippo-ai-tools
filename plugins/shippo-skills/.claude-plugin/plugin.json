@@ -1,0 +1,11 @@
+{
+  "name": "shippo-skills",
+  "description": "Shippo workflow automation skills and behavioral rules",
+  "version": "1.0.0",
+  "author": {
+    "name": "Shippo Engineering",
+    "email": "engineering@goshippo.com"
+  },
+  "keywords": ["shippo", "workflow", "jira", "github", "new-relic"],
+  "category": "productivity"
+}
