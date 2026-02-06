@@ -1,0 +1,19 @@
+{
+  "name": "shippo-tools",
+  "owner": {
+    "name": "Shippo Engineering",
+    "email": "engineering@goshippo.com"
+  },
+  "metadata": {
+    "description": "Internal Shippo AI tools and workflows",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "shippo-skills",
+      "source": "./plugins/shippo-skills",
+      "description": "Shippo workflow skills and behavioral rules",
+      "version": "1.0.0"
+    }
+  ]
+}
