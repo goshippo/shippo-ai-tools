@@ -44,9 +44,9 @@ When user provides a Jira ticket ID or URL, perform validation assessment to det
 - Verify the content exists and matches expected deliverables
 
 #### From Linked PRs (if applicable)
-- Search for PRs using `mcp_github-prs_search_pull_requests` with `minimal_output: true` to avoid oversized results
-- Use `mcp_github-prs_get_pull_request` with `minimal_output: true` to check PR status (merged/open/closed)
-- Use `mcp_github-prs_get_pull_request_files` to see what was changed
+- Search for PRs using `mcp__github-prs__search_pull_requests` with `minimal_output: true` to avoid oversized results
+- Use `mcp__github-prs__get_pull_request` with `minimal_output: true` to check PR status (merged/open/closed)
+- Use `mcp__github-prs__get_pull_request_files` to see what was changed
 - Verify PRs are merged if code changes were required
 
 #### From Codebase (if applicable)

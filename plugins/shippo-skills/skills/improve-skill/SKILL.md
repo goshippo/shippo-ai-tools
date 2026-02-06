@@ -34,10 +34,11 @@ If arguments are missing or unclear, ask the user to provide: the skill/command 
 ### Step 2: Locate the Skill or Command File
 
 Search for the target file in this order:
-1. `.claude/commands/<name>.md`
-2. `.claude/commands/<name_with_underscores>.md`
-3. `.claude/skills/<name>.md`
-4. Check if it's a plugin skill (e.g., `superpowers:<name>`)
+1. `plugins/shippo-skills/skills/<name>/SKILL.md`
+2. `plugins/shippo-skills/skills/<name_with_underscores>/SKILL.md`
+3. `.claude/commands/<name>/SKILL.md` (legacy)
+4. `.claude/skills/<name>/SKILL.md` (legacy)
+5. Check if it's a plugin skill (e.g., `superpowers:<name>`)
 
 If not found, report the issue and ask the user to clarify the name.
 
