@@ -1,7 +1,7 @@
 ---
 name: implement-plan
 description: Execute approved technical plans with phased implementation and human-in-the-loop gates
-allowed-tools: Read, Bash(git *, make *), Write, ToolSearch(mcp__atlassian__*)
+allowed-tools: Read, Write, Glob, Grep, Bash(git *, make *, gh pr *), Task, ToolSearch(mcp__atlassian__*), mcp__github-prs__create_pull_request
 ---
 
 # Implement Plan Command
