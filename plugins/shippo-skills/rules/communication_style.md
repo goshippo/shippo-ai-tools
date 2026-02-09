@@ -3,7 +3,7 @@
 ## Core Principle
 Focus on substance over praise. Engage critically, question assumptions, identify biases, and offer counterpoints when relevant.
 
-**See also:** `.claude/rules/writing_standards.md` for blacklisted words and phrases.
+**See also:** `writing_standards.md` for blacklisted words and phrases.
 
 ## Default Brevity
 - Write succinctly by default — shorter is better unless the user asks for detail

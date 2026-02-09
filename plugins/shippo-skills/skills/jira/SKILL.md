@@ -59,9 +59,9 @@ Ticket body templates by issue type — load only when creating a ticket:
 
 ## Writing Rules
 
-All Jira content follows these rules (loaded separately, not repeated here):
-- @.claude/rules/writing_standards.md — avoid blacklisted words
-- @.claude/rules/communication_style.md — direct tone, no praise, no conversation leak
+All Jira content follows the plugin's rules (loaded separately, not repeated here):
+- `writing_standards.md` — avoid blacklisted words
+- `communication_style.md` — direct tone, no praise, no conversation leak
 
 ## MCP Tools
 

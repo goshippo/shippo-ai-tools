@@ -9,14 +9,13 @@ Centralized AI skills, commands, and rules for sharing across engineering teams.
 **Recommended:** Install via Claude Code's plugin marketplace:
 
 ```bash
-# Option 1: Install from local clone
-cd ~/Projects  # or your preferred location
-git clone git@github.com:goshippo/shippo-ai-tools.git
-/plugin marketplace add ./shippo-ai-tools
+# Option 1: Install directly from GitHub (recommended)
+/plugin marketplace add goshippo/shippo-ai-tools
 /plugin install shippo-skills@shippo-tools
 
-# Option 2: Install directly from GitHub
-/plugin marketplace add goshippo/shippo-ai-tools
+# Option 2: Install from local clone
+git clone git@github.com:goshippo/shippo-ai-tools.git ~/Projects/shippo-ai-tools
+/plugin marketplace add ~/Projects/shippo-ai-tools
 /plugin install shippo-skills@shippo-tools
 ```
 
@@ -41,11 +40,9 @@ git clone git@github.com:goshippo/shippo-ai-tools.git
 ```
 shippo-ai-tools/
 ├── .claude-plugin/
-│   └── marketplace.json     # Marketplace metadata
+│   └── marketplace.json     # Marketplace metadata (skill bundles defined here)
 ├── plugins/
 │   └── shippo-skills/
-│       ├── .claude-plugin/
-│       │   └── plugin.json  # Plugin metadata
 │       ├── skills/          # Skills for specific workflows and domain knowledge
 │       │   ├── review-pr/
 │       │   │   └── SKILL.md

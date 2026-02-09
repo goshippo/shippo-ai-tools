@@ -104,4 +104,4 @@ Before using a blacklisted word, ask:
 
 If yes to #1 or #3, or no to #2 → choose a different word.
 
-**See also:** `.claude/rules/communication_style.md` for tone and structure rules.
+**See also:** `communication_style.md` for tone and structure rules.
