@@ -13,6 +13,7 @@
       "name": "shippo-skills",
       "description": "Shippo workflow skills and behavioral rules",
       "source": "./",
+      "strict": false,
       "skills": [
         "./plugins/shippo-skills/skills/address-pr-comments",
         "./plugins/shippo-skills/skills/archive-plan-files",
