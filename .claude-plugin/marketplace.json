@@ -1,0 +1,31 @@
+{
+  "name": "shippo-tools",
+  "owner": {
+    "name": "Shippo Engineering",
+    "email": "engineering@goshippo.com"
+  },
+  "metadata": {
+    "description": "Internal Shippo AI tools and workflows",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "shippo-skills",
+      "description": "Shippo workflow skills and behavioral rules",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./plugins/shippo-skills/skills/address-pr-comments",
+        "./plugins/shippo-skills/skills/archive-plan-files",
+        "./plugins/shippo-skills/skills/creating-pull-requests",
+        "./plugins/shippo-skills/skills/evaluate-alert",
+        "./plugins/shippo-skills/skills/implement-plan",
+        "./plugins/shippo-skills/skills/improve-skill",
+        "./plugins/shippo-skills/skills/jira",
+        "./plugins/shippo-skills/skills/plan-ticket",
+        "./plugins/shippo-skills/skills/querying-new-relic",
+        "./plugins/shippo-skills/skills/review-pr"
+      ]
+    }
+  ]
+}

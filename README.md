@@ -4,65 +4,82 @@ Centralized AI skills, commands, and rules for sharing across engineering teams.
 
 ## Quick Start
 
-### Option 1: Clone alongside your projects
+### Claude Code (Plugin Marketplace)
+
+**Recommended:** Install via Claude Code's plugin marketplace:
 
 ```bash
-cd ~/Projects  # or your preferred location
+# Option 1: Install directly from GitHub (recommended)
+/plugin marketplace add goshippo/shippo-ai-tools
+/plugin install shippo-skills@shippo-tools
+
+# Option 2: Install from local clone
+git clone git@github.com:goshippo/shippo-ai-tools.git ~/Projects/shippo-ai-tools
+/plugin marketplace add ~/Projects/shippo-ai-tools
+/plugin install shippo-skills@shippo-tools
+```
+
+Then invoke skills by name: `/review-pr`, `/plan-ticket`, etc.
+
+> **Note:** This is a private repo. For auto-updates when installing from GitHub, set `GITHUB_TOKEN` in your environment with repo read access.
+
+### Cursor / Warp
+
+For non-Claude Code tools, clone the repository and reference files directly:
+
+```bash
+cd ~/Projects
 git clone git@github.com:goshippo/shippo-ai-tools.git
 ```
 
-Then reference configs in your AI tool:
-- **Claude Code**: Use `@shippo-ai-tools/.claude/commands/review-pr.md` in prompts
 - **Cursor**: Copy desired rules to your project's `.cursorrules` or reference via `@`
 - **Warp**: Reference files in your Warp rules configuration
-
-### Option 2: Symlink (optional)
-
-```bash
-git clone git@github.com:goshippo/shippo-ai-tools.git ~/shippo-ai-tools
-ln -s ~/shippo-ai-tools/.claude ~/.claude
-```
-
-> **Note:** This replaces any existing `~/.claude` directory.
 
 ## Directory Structure
 
 ```
-.claude/
-├── commands/       # Slash commands (e.g., /review-pr, /plan-ticket)
-├── skills/         # Contextual skills triggered by task type
-└── rules/          # Behavioral rules applied across all interactions
+shippo-ai-tools/
+├── .claude-plugin/
+│   └── marketplace.json     # Marketplace metadata (skill bundles defined here)
+├── plugins/
+│   └── shippo-skills/
+│       ├── skills/          # Skills for specific workflows and domain knowledge
+│       │   ├── review-pr/
+│       │   │   └── SKILL.md
+│       │   ├── plan-ticket/
+│       │   │   └── SKILL.md
+│       │   └── ...
+│       └── rules/           # Behavioral rules applied across all interactions
+│           ├── communication_style.md
+│           ├── writing_standards.md
+│           └── engineering_work_taxonomy.md
+└── README.md
 ```
 
-### Commands vs Skills vs Rules
+Each skill is a directory with `SKILL.md` as the entrypoint. Optional supporting files include `template.md`, `examples/`, and `scripts/`.
+
+### Skills vs Rules
 
 | Type | Trigger | Purpose | Example |
 |------|---------|---------|---------|
-| **Command** | User invokes explicitly (`/command`) | Specific workflow with defined steps | `/review-pr`, `/commit` |
-| **Skill** | AI detects relevant context | Domain knowledge for specific tasks | `create-jira-ticket`, `querying-new-relic` |
+| **Skill** | User invokes (`/skill-name`) or AI detects relevant context | Specific workflows and domain knowledge | `/review-pr`, `jira` |
 | **Rule** | Always active | Behavioral constraints | `communication_style`, `writing_standards` |
 
 ## Available Configs
 
-### Commands
-| Command | Description |
-|---------|-------------|
-| `review-pr` | Thorough PR review focused on software engineering best practices and accurate assessment |
-| `plan-ticket` | Deep-dive Jira ticket analysis and implementation planning |
-| `implement-plan` | Execute approved technical plans with phased implementation and human-in-the-loop gates |
-| `improve-skill` | Analyze conversation history to find feedback patterns on a skill/command and suggest targeted updates |
-| `address-pr-comments` | Analyze and address all review comments on a pull request |
-| `evaluate-alert` | Evaluate noisy New Relic alerts using decision tree from Alert Noise Remediation |
-| `validate-ticket` | Validate Jira ticket completion against acceptance criteria |
-
 ### Skills
-| Skill | Description |
-|-------|-------------|
-| `create-jira-ticket` | Standardized Jira ticket creation with type-specific taxonomy and templates |
-| `creating-pull-requests` | PR creation with repo convention discovery and CI body-parsing safety |
-| `jira-comments` | Succinct, direct Jira comments with draft-first workflow |
-| `archive-plan-files` | Archive plan directories for closed Jira tickets |
-| `querying-new-relic` | NRQL query best practices with timeout and time range guidance |
+| Skill | Description | Invocation |
+|-------|-------------|------------|
+| `review-pr` | Thorough PR review focused on software engineering best practices and accurate assessment | `/review-pr` |
+| `plan-ticket` | Deep-dive Jira ticket analysis and implementation planning | `/plan-ticket` |
+| `implement-plan` | Execute approved technical plans with phased implementation and human-in-the-loop gates | `/implement-plan` |
+| `improve-skill` | Analyze conversation history to find feedback patterns on a skill/command and suggest targeted updates | `/improve-skill` |
+| `address-pr-comments` | Analyze and address all review comments on a pull request | `/address-pr-comments` |
+| `evaluate-alert` | Evaluate noisy New Relic alerts using decision tree from Alert Noise Remediation | `/evaluate-alert` |
+| `jira` | Jira ticket operations: create tickets, write comments, validate completion. Consolidated skill with templates and taxonomy reference. | Auto-invoked for Jira work |
+| `creating-pull-requests` | PR creation with repo convention discovery and CI body-parsing safety | Auto-invoked when creating PRs |
+| `archive-plan-files` | Archive plan directories for closed Jira tickets | `/archive-plan-files` |
+| `querying-new-relic` | NRQL query best practices with timeout and time range guidance | Auto-invoked for New Relic queries |
 
 ### Rules
 | Rule | Description |
@@ -75,29 +92,33 @@ ln -s ~/shippo-ai-tools/.claude ~/.claude
 
 ### Adding a New Config
 
-1. Create a branch: `git checkout -b add-my-config`
-2. Add your file to the appropriate directory:
-   - `commands/` for explicit workflows
-   - `skills/` for contextual domain knowledge
-   - `rules/` for behavioral constraints
-3. Follow the format of existing files (frontmatter + content)
-4. Open a PR with description of what the config does
+1. Create a branch: `git checkout -b add-my-skill`
+2. Add your skill directory to `plugins/shippo-skills/skills/`:
+   ```bash
+   mkdir -p plugins/shippo-skills/skills/my-skill
+   touch plugins/shippo-skills/skills/my-skill/SKILL.md
+   ```
+3. Follow the format of existing skills (YAML frontmatter + markdown content)
+4. Optional: Add supporting files (`template.md`, `examples/`, `scripts/`)
+5. Open a PR with description of what the skill does
 
-### Config File Format
+### Skill File Format
 
 ```markdown
 ---
-name: config-name
-description: Brief description of when this config applies
+name: my-skill
+description: Brief description of when this skill applies and what it does
+disable-model-invocation: true  # Optional: prevent auto-invocation, require /my-skill
+allowed-tools: Read, Grep, Bash(git *)  # Optional: restrict tool access
 ---
 
-# Config Title
+# My Skill
 
 ## Purpose
-What this config does and when to use it.
+What this skill does and when to use it.
 
-## Content
-The actual instructions, templates, or rules.
+## Instructions
+Step-by-step instructions or behavioral patterns.
 ```
 
 ### Guidelines
@@ -110,10 +131,12 @@ The actual instructions, templates, or rules.
 
 ## Updating
 
-Pull latest changes periodically:
+**Claude Code plugin users:** Updates are automatic when installed from GitHub (requires `GITHUB_TOKEN`).
+
+**Manual clone users:** Pull latest changes periodically:
 
 ```bash
-cd ~/shippo-ai-tools  # or wherever you cloned
+cd ~/Projects/shippo-ai-tools  # or wherever you cloned
 git pull origin main
 ```
 

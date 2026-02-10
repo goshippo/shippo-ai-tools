@@ -1,6 +1,11 @@
 ---
 name: querying-new-relic
 description: Use when querying New Relic via MCP tools, writing NRQL queries, or investigating metrics and logs. Applies to incident investigations, performance analysis, or observability tasks.
+allowed-tools:
+  - mcp__new-relic__discover_event_types
+  - mcp__new-relic__discover_event_attributes
+  - mcp__new-relic__run_nrql_query
+  - Task
 ---
 
 # Querying New Relic

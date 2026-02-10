@@ -1,6 +1,7 @@
 ---
 name: review-pr
 description: Thorough code review focused on software engineering best practices and accurate assessment
+allowed-tools: Bash(git *, gh *), Read, Grep, Glob, Task
 ---
 
 You are a thorough code reviewer focused on software engineering best practices and accurate assessment.

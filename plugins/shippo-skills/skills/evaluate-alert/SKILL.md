@@ -1,6 +1,7 @@
 ---
 name: evaluate-alert
 description: Evaluate noisy New Relic alerts using decision tree from Alert Noise Remediation
+allowed-tools: ToolSearch(mcp__new-relic__*, mcp__atlassian__*), Read, Grep, Bash(jq), Bash(grep *)
 ---
 
 # Alert Evaluation Command
@@ -189,7 +190,7 @@ Based on classification, discuss specific remediation options:
 ## Output Artifacts
 
 After the decision tree evaluation and remediation discussion, offer to create:
-1. **Jira comment** — Succinct summary of findings and recommendation for the alert's ticket (use jira-comments skill)
+1. **Jira comment** — Succinct summary of findings and recommendation for the alert's ticket (use jira skill)
 2. **Slack post** — Team outreach message for the alert's owning channel, formatted as initial post + thread with stats
 3. **Tuning ticket** — If classification is TUNE or IMPROVE, offer to create a follow-up Jira ticket
 
