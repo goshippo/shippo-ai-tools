@@ -37,8 +37,8 @@ When user provides a Jira ticket ID or URL, analyze it deeply and create an impl
    - **Phases** with human-in-the-loop checkpoints between major phases
    - **Tasks**: Bite-sized steps with exact file paths and test commands
    - **Acceptance criteria checklist** from the ticket
-   - **Recommended skills/plugins**: List discovered skills and plugins relevant to execution
-   - **Execution handoff**: Present available execution-related commands and skills the user has installed
+   - **Recommended skills**: List discovered skills relevant to execution
+   - **Execution handoff**: Present available execution-related skills the user has installed
 9. **Wait for developer agreement** on the plan
 
 ## Anti-Patterns
