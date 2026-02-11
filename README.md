@@ -54,6 +54,7 @@ ln -s ~/shippo-ai-tools/.claude ~/.claude
 | `address-pr-comments` | Analyze and address all review comments on a pull request |
 | `evaluate-alert` | Evaluate noisy New Relic alerts using decision tree from Alert Noise Remediation |
 | `validate-ticket` | Validate Jira ticket completion against acceptance criteria |
+| `migrate-golden-image` | Migrate a microservice from custom Docker base image to standardized golden image with phased execution |
 
 ### Skills
 | Skill | Description |
